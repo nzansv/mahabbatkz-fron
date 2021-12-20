@@ -4,6 +4,7 @@ import {AuthService} from '../../core/service/auth.service';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {UserModel} from '../../core/model/User.model';
+import {PersistenceService} from '../../core/service/persistence.service';
 
 @Component({
     selector: 'app-navbar',
@@ -16,7 +17,8 @@ export class NavbarComponent implements OnInit {
     isLogin: boolean;
     curUser: UserModel;
 
-    constructor(public location: Location, private element: ElementRef, private authService: AuthService, private router: Router) {
+    constructor(public location: Location, private element: ElementRef, private authService: AuthService, private router: Router,
+                private persistenceService: PersistenceService) {
         this.sidebarVisible = false;
         this.isLogin = false;
     }
@@ -24,13 +26,9 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
-        this.authService.currentUser.subscribe(value => {
-            this.curUser = value;
-            console.log(this.curUser)
-            if (value) {
-                this.isLogin = true;
-            }
-        })
+        if (this.persistenceService.get('HEADER_USER') !== null) {
+            this.isLogin = true;
+        }
     }
     signup() {
         this.router.navigateByUrl('signup');

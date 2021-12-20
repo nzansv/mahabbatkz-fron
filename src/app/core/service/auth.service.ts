@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import {UserModel} from '../model/User.model';
 import {map} from 'rxjs/operators';
+import {PersistenceService} from './persistence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthService {
 
   private readonly GENERAL = '/auth';
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,
+              private persistanceService: PersistenceService) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -56,12 +58,14 @@ export class AuthService {
               loggedUser.email = userData.sub;
               this.email = loggedUser.email;
               loggedUser.token = token.substr(7);
+              this.persistanceService.set('HEADER_USER', loggedUser.email);
               this.currentUserSubject.next(loggedUser);
           });
   }
     public logout(): void {
       this.setCrurrentUser(null);
-      this.email = null;
+        this.persistanceService.set('HEADER_USER', null);
+        this.email = null;
       this.router.navigateByUrl('/landing')
     }
 }

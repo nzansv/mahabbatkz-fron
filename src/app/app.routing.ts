@@ -16,7 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 const routes: Routes = [
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
     { path: 'home',             component: HomeComponent },
-    { path: 'user-profile',     component: ProfileComponent },
+    { path: 'user-profile/:id',     component: ProfileComponent },
     { path: 'search',     component: SearchComponent },
     { path: 'signup',           component: SignupComponent },
     { path: 'landing',          component: LandingComponent },

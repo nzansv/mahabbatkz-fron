@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class PersistenceService {
   public static readonly HEADER_USER_TOKEN = 'HEADER_USER_TOKEN';
+  public static readonly HEADER_USER = 'HEADER_USER';
 
   constructor() {
   }

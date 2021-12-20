@@ -16,14 +16,14 @@
             <div class="left" *ngIf="totalPages > 1" (click)="currentPage != 1 && changePage(-1)" [ngClass]="{'disabled':currentPage === 1}"></div>
             <div class="cards" [ngClass]="{'w-100': totalPages === 1}">
                 <div class="overflow" [ngStyle]="{'width': overflowWidth, 'left': pagePosition}">
-                    <div class="card" *ngFor="let i of arr; let index = index" [ngStyle]="{'width': cardWidth}">
+                    <div class="card" *ngFor="let i of recList; let index = index" [ngStyle]="{'width': cardWidth}">
                         <div class="avatar">
                             <img src="./assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                         </div>
-                        <p>Ann Bow, 67 years</p>
-                        <p>Kz, Aktau</p>
+                        <p>{{i.firstName}} {{i.lastName}}</p>
+                        <p>Kz, {{i.location}}</p>
                         <br>
-                        <button  routerLink="/user-profile" class="btn btn-sm btn-outline-info btn-round">View Profile</button>
+                        <button  (click)="viewProfile(i.userId)" class="btn btn-sm btn-outline-info btn-round">View Profile</button>
                     </div>
                 </div>
             </div>

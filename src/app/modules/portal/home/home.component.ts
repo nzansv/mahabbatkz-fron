@@ -1,5 +1,9 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../core/service/auth.service';
+import {UserService} from '../../../core/service/user.service';
+import {UserModel} from '../../../core/model/User.model';
+import {PersistenceService} from '../../../core/service/persistence.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +12,7 @@ import {AuthService} from '../../../core/service/auth.service';
 })
 export class HomeComponent implements OnInit {
   arr: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  recList: UserModel[];
   totalCards: number = this.arr.length;
   currentPage = 1;
   pagePosition = '0%';
@@ -15,6 +20,7 @@ export class HomeComponent implements OnInit {
   totalPages: number;
   overflowWidth: string;
   cardWidth: string;
+  email: string;
   containerWidth: number;
   @ViewChild('container', { static: true, read: ElementRef })
   container: ElementRef;
@@ -31,12 +37,23 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(
-      private authService: AuthService) { }
+      private authService: AuthService,
+      private persistenceService: PersistenceService,
+      private userService: UserService,
+      private router: Router) { }
 
   ngOnInit(): void {
     this.cardsPerPage = this.getCardsPerPage();
     this.initializeSlider();
-    console.log(this.authService.currentUserValueEmail)
+    if (this.persistenceService.get('HEADER_USER') !== null) {
+        this.getRecList();
+      }
+  }
+  getRecList() {
+    this.userService.getRecommendList(this.persistenceService.get('HEADER_USER')).subscribe(res => {
+      this.recList = res;
+      console.log(res)
+    });
   }
   initializeSlider() {
     this.totalPages = Math.ceil(this.totalCards / this.cardsPerPage);
@@ -44,6 +61,10 @@ export class HomeComponent implements OnInit {
     10}px)`;
     this.cardWidth = `calc((${100 / this.totalPages}% - ${this.cardsPerPage *
     10}px) / ${this.cardsPerPage})`;
+  }
+
+  viewProfile(id: number) {
+    this.router.navigateByUrl('/user-profile/' + id);
   }
 
   getCardsPerPage() {

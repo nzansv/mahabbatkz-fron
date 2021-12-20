@@ -10,13 +10,13 @@
                     <img src="./assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                 </div>
                 <div class="name">
-                    <h4 class="title">Jane Faker, 25<br /></h4>
-                    <h6 class="description">Kz, Aktau</h6>
+                    <h4 class="title">{{user.firstName}} {{user.lastName}}<br /></h4>
+                    <h6 class="description">Kz, {{user.location}}</h6>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 ml-auto mr-auto text-center">
-                    <p>Моя жизнь - секс, наркотики и рок-н-ролл, только без секса, наркотиков и рок-н-ролла. </p>
+                    <p>{{user.info}}</p>
                     <br />
                     <button class="btn btn-outline-success btn-round"><i class="fa fa-heart "></i> Send Match</button>
                 </div>
@@ -33,7 +33,7 @@
                                             <li>
                                                 <div class="row">
                                                     <div class="col-md-7 col-sm-4 ml-auto mr-auto">
-                                                        <h6>Location<br/><small>Kz, Aktau</small></h6>
+                                                        <h6>Location<br/><small>Kz, {{user.location}}</small></h6>
                                                     </div>
                                                 </div>
                                             </li>

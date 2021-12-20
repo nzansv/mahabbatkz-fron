@@ -1,11 +1,12 @@
 export class UserModel {
   id: number;
+  userId: number;
   email: string;
   gender: string;
   dob: string;
   info: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   location: string;
   token: string;
 }
