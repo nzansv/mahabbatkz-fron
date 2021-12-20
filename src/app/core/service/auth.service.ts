@@ -14,6 +14,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<UserModel>;
   public currentUser: Observable<UserModel>;
     public email: string;
+    isLogin = false;
 
   private readonly GENERAL = '/auth';
 
@@ -24,6 +25,10 @@ export class AuthService {
 
   public get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
+  }
+
+  public get getIsLogin(): boolean {
+      return this.isLogin;
   }
 
     public get currentUserValueEmail(): string {
@@ -55,6 +60,7 @@ export class AuthService {
               const loggedUser: UserModel = new UserModel();
               loggedUser.email = userData.sub;
               this.email = loggedUser.email;
+              loggedUser.token = token.substr(7);
               this.currentUserSubject.next(loggedUser);
           });
   }

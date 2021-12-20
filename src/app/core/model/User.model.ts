@@ -7,4 +7,5 @@ export class UserModel {
   firstname: string;
   lastname: string;
   location: string;
+  token: string;
 }
