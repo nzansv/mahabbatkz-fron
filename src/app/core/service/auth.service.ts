@@ -14,7 +14,6 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<UserModel>;
   public currentUser: Observable<UserModel>;
     public email: string;
-    isLogin = false;
 
   private readonly GENERAL = '/auth';
 
@@ -25,10 +24,6 @@ export class AuthService {
 
   public get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
-  }
-
-  public get getIsLogin(): boolean {
-      return this.isLogin;
   }
 
     public get currentUserValueEmail(): string {
@@ -65,7 +60,8 @@ export class AuthService {
           });
   }
     public logout(): void {
-      this.currentUser = null;
+      this.setCrurrentUser(null);
       this.email = null;
+      this.router.navigateByUrl('/landing')
     }
 }

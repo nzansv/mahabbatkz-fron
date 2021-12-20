@@ -1,4 +1,5 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AuthService} from '../../../core/service/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -29,11 +30,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(
+      private authService: AuthService) { }
 
   ngOnInit(): void {
     this.cardsPerPage = this.getCardsPerPage();
     this.initializeSlider();
+    console.log(this.authService.currentUserValueEmail)
   }
   initializeSlider() {
     this.totalPages = Math.ceil(this.totalCards / this.cardsPerPage);

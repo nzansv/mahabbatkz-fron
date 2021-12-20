@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {AuthService} from '../../core/service/auth.service';
 import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
+import {UserModel} from '../../core/model/User.model';
 
 @Component({
     selector: 'app-navbar',
@@ -12,19 +14,23 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     isLogin: boolean;
+    curUser: UserModel;
 
     constructor(public location: Location, private element: ElementRef, private authService: AuthService, private router: Router) {
         this.sidebarVisible = false;
-        if (this.authService.currentUserValueEmail !== null) {
-            this.isLogin = true;
-        } else {
-            this.isLogin = false;
-        }
+        this.isLogin = false;
     }
 
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+        this.authService.currentUser.subscribe(value => {
+            this.curUser = value;
+            console.log(this.curUser)
+            if (value) {
+                this.isLogin = true;
+            }
+        })
     }
     signup() {
         this.router.navigateByUrl('signup');
@@ -32,8 +38,6 @@ export class NavbarComponent implements OnInit {
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
-        // console.log(html);
-        // console.log(toggleButton, 'toggle');
 
         setTimeout(function(){
             toggleButton.classList.add('toggled');
@@ -42,9 +46,9 @@ export class NavbarComponent implements OnInit {
 
         this.sidebarVisible = true;
     };
-    logout(){
-        this.authService.logout();
+    logout() {
         this.isLogin = false;
+        this.authService.logout();
         this.router.navigateByUrl('/landing')
     }
     sidebarClose() {
