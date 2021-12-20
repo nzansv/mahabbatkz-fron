@@ -1,0 +1,79 @@
+<div class="wrapper">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/fabio-mangione.jpg');">
+        <div class="filter"></div>
+    </div>
+    <div class="section profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 ml-auto mr-auto text-center">
+                    <br/>
+                    <h3> Check all users with related interests and get matches with them! </h3>
+                </div>
+            </div>
+            <br/>
+        </div>
+        <div class="container" #container>
+            <div class="left" *ngIf="totalPages > 1" (click)="currentPage != 1 && changePage(-1)" [ngClass]="{'disabled':currentPage === 1}"></div>
+            <div class="cards" [ngClass]="{'w-100': totalPages === 1}">
+                <div class="overflow" [ngStyle]="{'width': overflowWidth, 'left': pagePosition}">
+                    <div class="card" *ngFor="let i of arr; let index = index" [ngStyle]="{'width': cardWidth}">
+                        <div class="avatar">
+                            <img src="./assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                        </div>
+                        <p>Ann Bow, 67 years</p>
+                        <p>Kz, Aktau</p>
+                        <br>
+                        <button  routerLink="/user-profile" class="btn btn-sm btn-outline-info btn-round">View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right" *ngIf="totalPages > 1" (click)="currentPage != totalPages && changePage(+1)"
+                 [ngClass]="{'disabled':currentPage === totalPages}"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ml-auto mr-auto text-center">
+                    <br/>
+                    <h3> Or Search by own filter among all single users! </h3>
+                </div>
+            </div>
+            <br/>
+        </div>
+        <div class="container">
+                <div class="col-md-4">
+                    <p>Gender</p>
+                    <div class="form-group">
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>I am looking for gay</option>
+                            <option value="1">I am looking for male</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <p>Age</p>
+                    <div class="form-group">
+                        <select class="custom-select" id="inputGroupSelect02">
+                            <option value="1">18-24</option>
+                            <option value="1">25-32</option>
+                            <option value="1">33-45</option>
+                            <option value="1">96+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p>Location</p>
+                    <div class="form-group">
+                        <select class="custom-select" id="inputGroupSelect03">
+                            <option selected>Almaty</option>
+                            <option value="1">Aktau</option>
+                        </select>
+                    </div>
+                </div>
+        </div>
+        <div class="container">
+            <div class="row mr-auto ml-auto text-center" style="margin-top: 10px">
+                <button  routerLink="/search" class="btn btn-lg btn-outline-danger btn-round "><i class="fa fa-heart "></i>  GO TO SEARCH AMONG ALL SINGLE ASSES</button>
+            </div>
+        </div>
+    </div>
+</div>
