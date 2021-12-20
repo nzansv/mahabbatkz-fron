@@ -140,7 +140,7 @@ paper-kit-2-angular
 │   │   │   ├── profile.component.html
 │   │   │   ├── profile.component.scss
 │   │   │   ├── profile.component.spec.ts
-│   │   │   └── profile.component.ts
+│   │   │   └── myprofile.component.ts
 │   │   ├── shared
 │   │   │   ├── footer
 │   │   │   │   ├── footer.component.html

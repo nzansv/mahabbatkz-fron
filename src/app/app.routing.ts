@@ -12,6 +12,7 @@ import { SearchComponent } from './modules/portal/search/search.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {MyProfileComponent} from './modules/portal/myprofile/myprofile.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'user-profile/:id',     component: ProfileComponent },
     { path: 'search',     component: SearchComponent },
     { path: 'signup',           component: SignupComponent },
+    { path: 'myprofile',           component: MyProfileComponent },
     { path: 'landing',          component: LandingComponent },
     { path: 'nucleoicons',      component: NucleoiconsComponent }
 ];

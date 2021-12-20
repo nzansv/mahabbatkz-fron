@@ -9,6 +9,7 @@ import {RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import {MyProfileComponent} from './myprofile/myprofile.component';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { SearchComponent } from './search/search.component';
     declarations: [
         LandingComponent,
         SignupComponent,
+        MyProfileComponent,
         HomeComponent,
         ProfileComponent,
         SearchComponent

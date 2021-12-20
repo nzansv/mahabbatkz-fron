@@ -21,6 +21,10 @@ export class UserService {
     return this.http.get(`${this.GENERAL_USER_DETAIL}/${id}`);
   }
 
+  getUserIdByEmail(email: any): Observable<any> {
+    return this.http.get(`${this.GENERAL_USER_DETAIL}/id/${email}`);
+  }
+
   getRecommendList(email: any): Observable<any> {
     return this.http.get(`${this.GENERAL_USER_DETAIL}/recommend-email/${email}`);
   }

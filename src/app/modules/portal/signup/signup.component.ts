@@ -29,7 +29,6 @@ export class SignupComponent implements OnInit {
 
     loginUser() {
         this.authService.login(this.form.getRawValue().email, this.form.getRawValue().password);
-        this.router.navigateByUrl('/home');
     }
 
 }

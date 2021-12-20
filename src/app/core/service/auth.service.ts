@@ -60,6 +60,7 @@ export class AuthService {
               loggedUser.token = token.substr(7);
               this.persistanceService.set('HEADER_USER', loggedUser.email);
               this.currentUserSubject.next(loggedUser);
+              this.router.navigateByUrl('/home');
           });
   }
     public logout(): void {

@@ -1,3 +1,5 @@
+import {Interest} from './Interest.model';
+
 export class UserModel {
   id: number;
   userId: number;
@@ -9,4 +11,5 @@ export class UserModel {
   lastName: string;
   location: string;
   token: string;
+  userInterests: Interest[];
 }

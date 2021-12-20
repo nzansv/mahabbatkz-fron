@@ -17,8 +17,7 @@ export class NavbarComponent implements OnInit {
     isLogin: boolean;
     curUser: UserModel;
 
-    constructor(public location: Location, private element: ElementRef, private authService: AuthService, private router: Router,
-                private persistenceService: PersistenceService) {
+    constructor(public location: Location, private element: ElementRef, private authService: AuthService, private router: Router, private persistenceService: PersistenceService) {
         this.sidebarVisible = false;
         this.isLogin = false;
     }
@@ -26,6 +25,12 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+        this.authService.currentUser.subscribe(value => {
+            this.curUser = value;
+            if (value) {
+                this.isLogin = true;
+            }
+        })
         if (this.persistenceService.get('HEADER_USER') !== null) {
             this.isLogin = true;
         }

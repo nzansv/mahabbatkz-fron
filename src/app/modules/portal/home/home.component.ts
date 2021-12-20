@@ -43,16 +43,23 @@ export class HomeComponent implements OnInit {
       private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.currentUser.subscribe(value => {
+      if (value) {
+        this.email = value.email;
+      }
+    });
+    if (this.email == null) {
+      this.email = this.persistenceService.get('HEADER_USER');
+    }
     this.cardsPerPage = this.getCardsPerPage();
     this.initializeSlider();
-    if (this.persistenceService.get('HEADER_USER') !== null) {
+    if (this.persistenceService.get('HEADER_USER') !== null || this.email !== null) {
         this.getRecList();
       }
   }
   getRecList() {
-    this.userService.getRecommendList(this.persistenceService.get('HEADER_USER')).subscribe(res => {
+    this.userService.getRecommendList(this.email).subscribe(res => {
       this.recList = res;
-      console.log(res)
     });
   }
   initializeSlider() {
