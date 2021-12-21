@@ -21,8 +21,16 @@ export class UserService {
     return this.http.get(`${this.GENERAL_USER_DETAIL}/${id}`);
   }
 
+  getUserDetailsByLocationAndGender(params: string): Observable<any> {
+    return this.http.get(`${this.GENERAL_USER_DETAIL}/loc-gen?${params}`);
+  }
+
   getUserIdByEmail(email: any): Observable<any> {
     return this.http.get(`${this.GENERAL_USER_DETAIL}/id/${email}`);
+  }
+
+  getUserEmailById(id: number): Observable<any> {
+    return this.http.get(`${this.GENERAL}/email/${id}`);
   }
 
   getRecommendList(email: any): Observable<any> {

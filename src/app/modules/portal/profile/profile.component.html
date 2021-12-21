@@ -18,7 +18,7 @@
                 <div class="col-md-6 ml-auto mr-auto text-center">
                     <p>{{user.info}}</p>
                     <br />
-                    <button class="btn btn-outline-success btn-round"><i class="fa fa-heart "></i> Send Match</button>
+                    <button (click)="match(user.userId)" class="btn btn-outline-success btn-round"><i class="fa fa-heart "></i> Send Match</button>
                 </div>
             </div>
             <br/>
